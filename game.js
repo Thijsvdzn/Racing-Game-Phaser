@@ -51,7 +51,7 @@ function create () {
         // If a minute has pased
         if (gameState.seconds === 60){
             gameState.seconds = 0;
-            gameState.minutes = 1;
+            gameState.minutes++;
         }
         
         // If seconds is only 1 digit
@@ -80,6 +80,7 @@ function create () {
     gameState.lap = 0;
     gameState.checkpointDebug = this.add.text(10, 70, `checkpoint: ${gameState.checkpoint}`, {fontSize: "30px", fill: "#ffffff"});
     gameState.lapDebug = this.add.text(10, 100, `lap: ${gameState.lap}`, {fontSize: "30px", fill: "#ffffff"});
+    gameState.lapTimes = this.add.text(770, 10, ``, {fontSize: "30px", fill: "#ffffff"});
 }
 
     function update () {
@@ -122,6 +123,12 @@ function create () {
                 gameState.lap++;
                 gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
                 gameState.lapDebug.setText(`lap: ${gameState.lap}`);
+                if (gameState.lapTimes.text === ''){
+                    gameState.lapTimes.setText(`Lap ${gameState.lap}: 0${gameState.minutes}:${gameState.seconds}`);
+                } else {
+                    gameState.lapTimes.setText(`${gameState.lapTimes.text}\nLap ${gameState.lap}: 0${gameState.minutes}:${gameState.seconds}`);
+                }
+                
             }
         });
         
