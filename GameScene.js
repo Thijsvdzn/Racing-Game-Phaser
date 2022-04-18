@@ -14,10 +14,14 @@ class GameScene extends Phaser.Scene {
         this.physics.pause();
         
         // Create the background (AKA the track)
-        gameState.background = this.add.image(0, 0, 'background').setScale(2).setOrigin(0, 0);
+        gameState.background = this.add.image(0, 0, 'background').setScale(5).setOrigin(0, 0);
         
         // Add the player    
-        gameState.player = this.physics.add.sprite(100, 450, 'car').setScale(.5);
+        gameState.player = this.physics.add.sprite(100, 450, 'car').setScale(1);
+        
+        this.cameras.main.setBounds(0, 0, 2500, 2500);
+        this.physics.world.setBounds(0, 0, 2500, 2500);
+        this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5);
 
         // Add world bounds collider so the player doesn't go out of bounds
         gameState.player.setCollideWorldBounds(true);
