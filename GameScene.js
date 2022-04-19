@@ -4,9 +4,10 @@ class GameScene extends Phaser.Scene {
     };
 
     preload() {
-        this.load.image('background', 'assets/sprites/Map.png');
+        this.load.image('racetrack', 'assets/sprites/racetrack.png');
         this.load.image('car', 'assets/sprites/car.png');
-        this.load.image('checkpoint', 'assets/sprites/checkpoint.png');
+        this.load.image('checkpointV', 'assets/sprites/checkpointV.png');
+        this.load.image('checkpointH', 'assets/sprites/checkpointH.png');
     };
     
     create() {
@@ -14,15 +15,16 @@ class GameScene extends Phaser.Scene {
         this.physics.pause();
         
         // Create the background (AKA the track)
-        gameState.background = this.add.image(0, 0, 'background').setScale(5).setOrigin(0, 0);
+        gameState.racetrack = this.add.image(0, 0, 'racetrack').setScale(5).setOrigin(0, 0);
         
         // Add the player    
-        gameState.player = this.physics.add.sprite(100, 450, 'car').setScale(1);
+        gameState.player = this.physics.add.sprite(572, 1300, 'car').setScale(.5);
         
+        // Add the camera functionalities
         this.cameras.main.setBounds(0, 0, 2500, 2500);
         this.physics.world.setBounds(0, 0, 2500, 2500);
-        this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5);
-
+        this.cameras.main.startFollow(gameState.player, true, .5, .5);
+        
         // Add world bounds collider so the player doesn't go out of bounds
         gameState.player.setCollideWorldBounds(true);
 
@@ -93,10 +95,31 @@ class GameScene extends Phaser.Scene {
         gameState.speedText = this.add.text(10, 40, `speed: ${gameState.speed}`, {fontSize: "30px", fill: "#ffffff"});
     
         // Every rectangle to make the checkpoint system work
-        gameState.finishLine = this.physics.add.sprite(50, 475, 'checkpoint').setOrigin(0,0);
-        gameState.finishLine.setImmovable = true;
-        gameState.checkpoint1 = this.physics.add.sprite(790, 170, 'checkpoint').setOrigin(0,0);
-        gameState.checkpoint2 = this.physics.add.sprite(800, 660, 'checkpoint').setOrigin(0,0);
+        gameState.finishLine = this.physics.add.sprite( 525, 1230, 'checkpointH').setOrigin(0,0);
+        gameState.checkpoint1 = this.physics.add.sprite( 525, 1000, 'checkpointH').setOrigin(0,0);
+        gameState.checkpoint2 = this.physics.add.sprite( 750, 740, 'checkpointV').setOrigin(0,0);
+        gameState.checkpoint3 = this.physics.add.sprite( 1000, 500, 'checkpointV').setOrigin(0,0);
+        gameState.checkpoint4 = this.physics.add.sprite( 1460, 750, 'checkpointH').setOrigin(0,0);
+        gameState.checkpoint5 = this.physics.add.sprite( 1650, 1100, 'checkpointV').setOrigin(0,0);
+        gameState.checkpoint6 = this.physics.add.sprite( 1940, 1400, 'checkpointH').setOrigin(0,0);
+        gameState.checkpoint7 = this.physics.add.sprite( 1650, 1630, 'checkpointV').setOrigin(0,0);
+        gameState.checkpoint8 = this.physics.add.sprite( 1095, 1780, 'checkpointH').setOrigin(0,0);
+        gameState.checkpoint9 = this.physics.add.sprite( 670, 1820, 'checkpointV').setOrigin(0,0);
+        gameState.checkpoint10 = this.physics.add.sprite( 525, 1700, 'checkpointH').setOrigin(0,0);
+        gameState.checkpoint11 = this.physics.add.sprite( 525, 1500, 'checkpointH').setOrigin(0,0);
+        
+        gameState.finishLine.visible = false;
+        gameState.checkpoint1.visible = false;
+        gameState.checkpoint2.visible = false;
+        gameState.checkpoint3.visible = false;
+        gameState.checkpoint4.visible = false;
+        gameState.checkpoint5.visible = false;
+        gameState.checkpoint6.visible = false;
+        gameState.checkpoint7.visible = false;
+        gameState.checkpoint8.visible = false;
+        gameState.checkpoint9.visible = false;
+        gameState.checkpoint10.visible = false;
+        gameState.checkpoint11.visible = false;
         
         // Every element to make the checkpoint system work
         gameState.checkpoint = 0;
@@ -115,6 +138,9 @@ class GameScene extends Phaser.Scene {
         gameState.lapFiveTime = "";
         // WIP
         gameState.fastestLap = [];
+        
+        // Make text sticky ////// WIPPPP
+        //this.cameras.main.ignore( [gameState.countdown, gameState.speed, gameState.clockText, gameState.checkpointDebug, gameState.lapDebug] );
     };
 
     update() {
@@ -152,8 +178,8 @@ class GameScene extends Phaser.Scene {
         
         // Checkpoint system
         this.physics.add.overlap(gameState.player, gameState.finishLine, function() {
-            if (gameState.checkpoint === 2){
-                // If the checkpoint is 2 (AKA the one before the finish line)
+            if (gameState.checkpoint === 11){
+                // If the checkpoint is 11 (AKA the one before the finish line)
                 gameState.checkpoint = 0;
                 gameState.lap++;
                 gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
@@ -199,6 +225,7 @@ class GameScene extends Phaser.Scene {
                 // Reset the lap times to 0 after it has been added to the lap text
                 gameState.lapSeconds = 0;
                 gameState.lapMinutes = 0;
+                console.log("Finish Line reached");
                 
             }
         });
@@ -217,6 +244,87 @@ class GameScene extends Phaser.Scene {
             // A check to see that the player didn't skip a checkpoint
             if (gameState.checkpoint === 1){
                 gameState.checkpoint = 2;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the third checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint3, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 2){
+                gameState.checkpoint = 3;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the fourth checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint4, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 3){
+                gameState.checkpoint = 4;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the fifth checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint5, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 4){
+                gameState.checkpoint = 5;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the sixth checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint6, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 5){
+                gameState.checkpoint = 6;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the seventh checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint7, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 6){
+                gameState.checkpoint = 7;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the eight checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint8, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 7){
+                gameState.checkpoint = 8;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the ninth checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint9, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 8){
+                gameState.checkpoint = 9;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the tenth checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint10, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 9){
+                gameState.checkpoint = 10;
+                gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
+            }
+        });
+        
+        // Add overlap for the eleventh checkpoint
+        this.physics.add.overlap(gameState.player, gameState.checkpoint11, function() {
+            // A check to see that the player didn't skip a checkpoint
+            if (gameState.checkpoint === 10){
+                gameState.checkpoint = 11;
                 gameState.checkpointDebug.setText(`checkpoint: ${gameState.checkpoint}`);
             }
         });
