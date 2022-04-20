@@ -14,7 +14,7 @@ class EndScene extends Phaser.Scene {
         gameState.background.alpha = 0.5;
         
         // Explanation text
-        this.add.text(400, 400, `${gameState.lapOneTime}\n${gameState.lapTwoTime}\n${gameState.lapThreeTime}\n${gameState.lapFourTime}\n${gameState.lapFiveTime}\nPress enter to go back\to the start screen`, {fontSize: "30px", fill: "#ffffff"});
+        this.add.text(200, 200, `${gameState.lapOneTime}\n${gameState.lapTwoTime}\n${gameState.lapThreeTime}\n${gameState.lapFourTime}\n${gameState.lapFiveTime}\nPress enter to go back\to the start screen`, {fontSize: "30px", fill: "#ffffff"});
 
         // Creates keyboard keys
         gameState.keys = {};
