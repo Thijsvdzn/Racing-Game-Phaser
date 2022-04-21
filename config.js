@@ -10,7 +10,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ StartScene, GameScene, EndScene ]
+    scene: [ StartScene, WoodyWetlands, WoodyWetlandsEnd, DryDryLand, DryDryLandEnd ]
 };
 
 var game = new Phaser.Game(config);
