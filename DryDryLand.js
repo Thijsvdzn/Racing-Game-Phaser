@@ -4,7 +4,7 @@ class DryDryLand extends Phaser.Scene {
     };
 
     preload() {
-        this.load.image('racetrack', 'assets/sprites/DryDryLand.png');
+        this.load.image('racetrackDDL', 'assets/sprites/DryDryLand.png');
         this.load.image('car', 'assets/sprites/car.png');
         this.load.image('checkpointV', 'assets/sprites/checkpointV.png');
         this.load.image('checkpointH', 'assets/sprites/checkpointH.png');
@@ -18,7 +18,7 @@ class DryDryLand extends Phaser.Scene {
         this.physics.pause();
         
         // Create the background (AKA the track)
-        gameState.racetrackDDL = this.add.image(0, 0, 'racetrack').setScale(5).setOrigin(0, 0);
+        gameState.racetrackDDL = this.add.image(0, 0, 'racetrackDDL').setScale(5).setOrigin(0, 0);
         
         // Add the player    
         gameState.player = this.physics.add.sprite(1365, 1180, 'car').setScale(.5);
@@ -35,7 +35,7 @@ class DryDryLand extends Phaser.Scene {
         gameState.cursors = this.input.keyboard.createCursorKeys();
         
         // Add every element for the timer
-        gameState.clockText = this.add.text(10, 10, "00:00", {fontSize: "30px", fill: "#ffffff"});
+        //gameState.clockText = this.add.text(10, 10, "00:00", {fontSize: "30px", fill: "#ffffff"});
         gameState.seconds = 0;
         gameState.minutes = 0;
     
@@ -54,10 +54,10 @@ class DryDryLand extends Phaser.Scene {
             // If seconds is only 1 digit
             if (gameState.seconds < 10) {
                 // Update the text
-                gameState.clockText.setText(`0${gameState.minutes}:0${gameState.seconds}`);
+                //gameState.clockText.setText(`0${gameState.minutes}:0${gameState.seconds}`);
             } else {
                 // Update the text
-                gameState.clockText.setText(`0${gameState.minutes}:${gameState.seconds}`);
+                //gameState.clockText.setText(`0${gameState.minutes}:${gameState.seconds}`);
             }
             
             if (gameState.lapSeconds > 60) {
@@ -100,7 +100,7 @@ class DryDryLand extends Phaser.Scene {
 
         // Every element to make the speed work
         gameState.speed = 0;
-        gameState.speedText = this.add.text(10, 40, `speed: ${gameState.speed}`, {fontSize: "30px", fill: "#ffffff"});
+        //gameState.speedText = this.add.text(10, 40, `speed: ${gameState.speed}`, {fontSize: "30px", fill: "#ffffff"});
     
         // Every rectangle to make the checkpoint system work
         gameState.finishLine = this.physics.add.sprite( 1320, 1130, 'checkpointH').setOrigin(0,0);
@@ -127,11 +127,6 @@ class DryDryLand extends Phaser.Scene {
         gameState.lapThreeTime = "";
         gameState.lapFourTime = "";
         gameState.lapFiveTime = "";
-        // WIP
-        gameState.fastestLap = [];
-        
-        // Make text sticky ////// WIPPPP
-        //this.cameras.main.ignore( [gameState.countdown, gameState.speed, gameState.clockText, gameState.checkpointDebug, gameState.lapDebug] );
     };
 
     update() {
@@ -155,12 +150,12 @@ class DryDryLand extends Phaser.Scene {
         if (gameState.cursors.up.isDown) {
             if (gameState.speed < 400){
                 gameState.speed++;
-                gameState.speedText.setText(`speed: ${gameState.speed}`);
+                //gameState.speedText.setText(`speed: ${gameState.speed}`);
             }
         } else {
             if (gameState.speed > 0){
                 gameState.speed--;
-                gameState.speedText.setText(`speed: ${gameState.speed}`);
+                //gameState.speedText.setText(`speed: ${gameState.speed}`);
             }
         }
         
