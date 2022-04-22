@@ -62,6 +62,7 @@ class DryDryLand extends Phaser.Scene {
             
             if (gameState.lapSeconds > 60) {
                 gameState.lapMinutes++;
+                gameState.lapSeconds++;
             }
         }
     
@@ -174,46 +175,52 @@ class DryDryLand extends Phaser.Scene {
                 if (gameState.lap === 1) {
                     if (gameState.lapSeconds > 10){
                         gameState.lapOneTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     } else {
-                        gameState.lapOneTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapOneTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`);
                     }
-                    gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
+                    
                     
                 // If the lap count is 2 add the lap 2 time
                 } else if (gameState.lap === 2) {
                     if (gameState.lapSeconds > 10){
                         gameState.lapTwoTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     } else {
-                        gameState.lapTwoTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapTwoTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`);
                     }
-                    gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     
                 // If the lap count is 3 add the lap three time
                 } else if (gameState.lap === 3) {
                     if (gameState.lapSeconds > 10){
                         gameState.lapThreeTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     } else {
-                        gameState.lapThreeTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapThreeTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`);
                     }
-                    gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     
                 // If the lap count is 4 add the lap four time
                 } else if (gameState.lap === 4) {
                     if (gameState.lapSeconds > 10){
                         gameState.lapFourTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     } else {
                         gameState.lapFourTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`);
                     }
-                    gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     
                 // If the lap count is 5 add the lap five time
                 } else if (gameState.lap === 5) {
                     if (gameState.lapSeconds > 10){
                         gameState.lapFiveTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                     } else {
                         gameState.lapFiveTime = `Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`;
+                        gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:0${gameState.lapSeconds}`);
                     }
-                    gameState.lapText.setText(`Lap ${gameState.lap}: 0${gameState.lapMinutes}:${gameState.lapSeconds}`);
                 }
                 
                 // Reset the lap times to 0 after it has been added to the lap text
